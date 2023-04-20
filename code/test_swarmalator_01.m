@@ -3,7 +3,7 @@
 
 % (C) M. Zhong
 
-T                       = 100;           % final time
+T                       = 10;           % final time
 N                       = 100;          % Number of agents
 d                       = 2;             % dimension of the physical space
 ode_type                = 0;             % type of the ODE system
@@ -25,14 +25,14 @@ switch ode_type
   case 0
     phi                 = {@(r, z) energy_phi(r, z, A, J, B), @(r, z) xi_phi(r, z, K)};
 % initial distribution for xi
-    xi0                 = 2 * pi * rand(1, N) - pi;    
+    xi0                 = 2 * pi * rand(1, N) - pi;
     y0                  = [x0(:); xi0(:)];
   case 1
     phi                 = {@(r, s, z) energy_phi(r, z, A, J, B), @(r, s, z) ones(size(s)), ...
                            @(r, s, z) xi_phi(r, z, K)};
     theta0              = 2 * pi * rand(1, N) - pi;
 % initial distribution for xi
-    xi0                 = 2 * pi * rand(1, N) - pi;      
+    xi0                 = 2 * pi * rand(1, N) - pi;
     y0                  = [x0(:); theta0(:); xi0(:)];
   case 2
     % we take K = sigma = 1, and beta = 0.25;
@@ -40,11 +40,11 @@ switch ode_type
     sigma               = 1;
     beta                = 0.25;
     phi                 = {@(r, s, z) energy_phi(r, z, A, J, B), @(r, s, z) alignment_phi(r, K, ...
-                           sigma, beta), @(r, s, z) xi_phi(r, z, K)};    
+                           sigma, beta), @(r, s, z) xi_phi(r, z, K)};
 % initial distribution for xi
-    xi0                 = 2 * pi * rand(1, N) - pi;      
+    xi0                 = 2 * pi * rand(1, N) - pi;
     v0                  = rand(d, N);
-    y0                  = [xo(:); v0(:); xi0(:)];
+    y0                  = [x0(:); v0(:); xi0(:)];
   otherwise
     % need more phis on 3 and 4
     error('');
