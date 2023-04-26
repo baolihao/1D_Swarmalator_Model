@@ -27,7 +27,7 @@ L                       = 101;
 tint                    = linspace(0, T, L);
 yint                    = deval(soln, tint);
 yint_hat                = zeros(2 * N + N, L);
-%
+% change it back to y = [x; theta], where theta is our xi
 for l = 1 : L
   y_t                   = yint(:, l);
   r_t                   = y_t(1 : N);
@@ -36,5 +36,7 @@ for l = 1 : L
   yint_hat(:, l)        = [x_t(:); y_t(2 * N + 1 : end)];
 end
 % visualize the trajectory
-plot_traj(tint, yint_hat, 2, N, 0);
+d                       = 2;
+ode_type                = 0;
+plot_traj(tint, yint_hat, d, N, ode_type);
 %end

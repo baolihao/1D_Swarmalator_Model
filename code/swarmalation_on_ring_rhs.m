@@ -1,24 +1,24 @@
 function rhs = swarmalation_on_ring_rhs(y, J, K, sigma, N)
-%
+% function rhs = swarmalation_on_ring_rhs(y, J, K, sigma, N)
 
-%
+% (C) M. Zhong
 
-r        = y(1 : N);
-phi      = y(N + 1 : 2 * N);
-theta    = y(2 * N + 1 : 3 * N);
-x        = r' .* [cos(phi'); sin(phi')];
-xij      = repmat(x, N, 1) - repmat(x(:), 1, N);
-dij      = get_pairwise_dist(xij, 2, N);
-ind      = logical(eye(N));
-dij(ind) = 1;
-H_r      = 1/N * sum((r .* cos(phi - phi') - r') .* (1 - dij.^(-2)), 2);
-Z_0      = 1/N * sum(exp(1i * theta));
-R_0      = abs(Z_0);
-Psi_0    = angle(Z_0);
+r         = y(1 : N);
+phi       = y(N + 1 : 2 * N);
+theta     = y(2 * N + 1 : 3 * N);
+x         = r' .* [cos(phi'); sin(phi')];
+xij       = repmat(x, N, 1) - repmat(x(:), 1, N);
+dij       = get_pairwise_dist(xij, 2, N);
+ind       = logical(eye(N));
+dij(ind)  = 1;
+H_r       = 1/N * sum((r .* cos(phi - phi') - r') .* (1 - dij.^(-2)), 2);
+Z_0       = 1/N * sum(exp(1i * theta));
+R_0       = abs(Z_0);
+Psi_0     = angle(Z_0);
 % not sure if it should be the 1st momement or 2nd moment
-Z_1      = 1/N * sum(r .* exp(1i * theta));
-R_1      = abs(Z_1);
-Psi_1    = angle(Z_1);
+Z_1       = 1/N * sum(r .* exp(1i * theta));
+R_1       = abs(Z_1);
+Psi_1     = angle(Z_1);
 % 2nd moment
 % Z_2      = 1/N * sum(r.^(2) .* exp(1i * theta));
 % R_2      = abs(Z_2);
