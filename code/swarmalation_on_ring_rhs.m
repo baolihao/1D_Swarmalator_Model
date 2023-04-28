@@ -14,8 +14,7 @@ phii      = phij';
 thetaj    = y(2 * N + 1 : 3 * N);
 % compute dij = |xj - xi|
 x         = ri .* [cos(phii); sin(phii)];
-xij       = repmat(x, N, 1) - repmat(x(:), 1, N);
-dij       = get_pairwise_dist(xij, 2, N);
+dij       = fast_pairwise_dist(x, N);
 ind       = logical(eye(N));
 dij(ind)  = 1;
 % compute 1 - dij^(-2)
@@ -39,15 +38,14 @@ S_tilde_p = abs(W_tilde_p);
 S_tilde_m = abs(W_tilde_m);
 Psi_p     = angle(W_tilde_p);
 Psi_m     = angle(W_tilde_m);
-r_dot     = H_r - J * rj * R_0 .* cos(Psi_0 - thetaj) + J/2 * (...
-            S_tilde_p * cos(Psi_p - (phij + thetaj)) + ...
-            S_tilde_m * cos(Psi_m - (phij - thetaj)));
+r_dot     = H_r - J * rj * R_0 .* cos(Psi_0 - thetaj) + J/2 * (S_tilde_p * cos(Psi_p - (phij + ...
+            thetaj)) + S_tilde_m * cos(Psi_m - (phij - thetaj)));
 H_phi     = 1/N * sum((rj ./ ri) .* sin(phij - phii) .* mod, 2);
-phi_dot   = H_phi + J./(2 * rj) .* (S_tilde_p * sin(Psi_p - (phij + thetaj)) ...
-            + S_tilde_m * sin(Psi_m - (phij - thetaj)));
+phi_dot   = H_phi + J./(2 * rj) .* (S_tilde_p * sin(Psi_p - (phij + thetaj)) + S_tilde_m * ...
+            sin(Psi_m - (phij - thetaj)));
 % (R_1, Psi_1) might be (R_2, Psi_2)
 theta_dot = K * (1 - rj.^(2)/sigma^2) * R_0 .* sin(Psi_0 - thetaj) - K/sigma^2 *...
-            R_1 * sin(Psi_1 - thetaj) + K * rj/sigma^2 .* (S_tilde_p * ...
-            sin(Psi_p - (phij + thetaj)) + S_tilde_m * sin(Psi_m - (phij - thetaj)));
+            R_1 * sin(Psi_1 - thetaj) + K * rj/sigma^2 .* (S_tilde_p * sin(Psi_p - (phij + ...
+            thetaj)) + S_tilde_m * sin(Psi_m - (phij - thetaj)));
 rhs       = [r_dot; phi_dot; theta_dot];
 end
