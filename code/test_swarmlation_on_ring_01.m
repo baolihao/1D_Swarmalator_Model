@@ -3,9 +3,9 @@
 
 % (C) M. Zhong
 
-T                       = 1;            % final time
+T                       = 1;             % final time
 N                       = 20;            % Number of agents
-d                       = 2;             % dimension of the physical space
+%d                       = 2;             % dimension of the physical space
 % (J, K) can be: (0.1, 1), (0.1, -1), (1, 0), (1, -0.1), (1, -0.75)
 J                       = 0.1;
 K                       = 1;
