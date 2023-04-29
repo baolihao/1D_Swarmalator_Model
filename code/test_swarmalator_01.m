@@ -57,5 +57,5 @@ soln                    = ode23(rhs, tspan, y0);
 tint                    = linspace(0, T, 101);
 yint                    = deval(soln, tint);
 % visualize the trajectory
-plot_traj(tint, yint, d, N, ode_type);
+plot_trajectory(tint, yint, d, N, ode_type);
 %end

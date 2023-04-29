@@ -29,16 +29,16 @@ if d > 2
 end
 switch ode_type
   case 0
-    xi                = yint(d * N + 1 : (d + 1) * N, :);
-   
+    xi                = wrapTo2Pi(yint(d * N + 1 : (d + 1) * N, :));
+    
   case 1
     theta             = reshape(yint(d * N + 1 : (d + 1) * N), [1, N]);
     v                 = [cos(theta); sin(theta)];
-    xi                = yint((d + 1) * N + 1 : (d + 2) * N,:);  
+    xi                = wrapTo2Pi(yint((d + 1) * N + 1 : (d + 2) * N,:));  
    
   case 2
     v                 = reshape(yint(d * N + 1 : 2 * d * N), [d, N]);
-    xi                = yint(2 * d * N + 1 : (2 * d + 1) * N,:);
+    xi                = wrapTo2Pi(yint(2 * d * N + 1 : (2 * d + 1) * N,:));
    
 end
 
