@@ -1,4 +1,4 @@
-function plot_2(tint, yint,Sp,Sn, N)
+function plot_RealPlane(tint, yint,Sp,Sn, N)
 
 T            = length(tint);
 
