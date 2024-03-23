@@ -1,4 +1,4 @@
-function plot_t(tint, yint, N,ind,p)
+function plot_XphasePlane(tint, yint, N,ind,p)
 
 T            = length(tint);
 
